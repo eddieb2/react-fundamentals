@@ -10,20 +10,32 @@
   <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
   -->
 
+  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+
   <script type="module">
-    const rootElement = document.getElementById('root')
+    const rootElement =
+      document.getElementById('root')
 
-    // You're going to re-implement this code using React!
-    // 💣 So go ahead and delete this implementation (or comment it out for now)
-    // These three lines are similar to React.createElement
-    const element = document.createElement('div')
-    element.textContent = 'Hello World' // 💰 in React, you set this with the "children" prop
-    element.className = 'container' // 💰 in React, this is also called the "className" prop
-    // This is similar to ReactDOM.render
-    rootElement.append(element)
+    const elementProps = {className: 'container'}
+    const elementType = 'div'
 
-    // 🐨 Please re-implement the regular document.createElement code above
-    // with these React API calls
-    // 💰 The example in the markdown file should be a good hint for you.
+    const span1 = React.createElement('span', {
+      key: '0',
+      children: 'Hello',
+    })
+    const span2 = React.createElement('span', {
+      key: '1',
+      children: 'World',
+    })
+
+    const reactElement = React.createElement(
+      elementType,
+      elementProps,
+      [span1, span2],
+    )
+
+    // adds our div (reactElement) to the root element of the page
+    ReactDOM.render(reactElement, rootElement)
   </script>
 </body>
