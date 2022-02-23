@@ -14,69 +14,85 @@ import '../box-styles.css';
 // 🐨 also use the style prop to make the font italic
 // 💰 Here are available style attributes: backgroundColor, fontStyle
 
-// Exercise
-const smallBox = (
-	<div
-		className='box box--small'
-		style={{ background: 'lightblue', fontStyle: 'italic' }}
-	>
-		small lightblue box
-	</div>
-);
-
-const mediumBox = (
-	<div
-		className='box box--medium'
-		style={{ background: 'pink', fontStyle: 'italic' }}
-	>
-		medium pink box
-	</div>
-);
-
-const largeBox = (
-	<div
-		className='box box--large'
-		style={{ background: 'orange', fontStyle: 'italic' }}
-	>
-		large orange box
-	</div>
-);
-
 // EXTRA CREDIT #1
 // create a function that takes params, gives these params to JSX and returns a custom component
-let Box = ({ children, classname, styles }) => {
-	return (
-		<div className={classname} style={{ styles, ...styles }}>
-			{children}
-		</div>
-	);
-};
+// let Box = ({ children, classname, styles }) => {
+// 	return (
+// 		<div className={classname} style={{ styles, ...styles }}>
+// 			{children}
+// 		</div>
+// 	);
+// };
 
 // EXTRA CREDIT #2
 // append the 'size' prop to the variable classname to apply the appropriate additional class
-let Box1 = ({ children, size, styles }) => {
-	let classname = 'box';
+// let Box1 = ({ children, size, styles }) => {
+// 	let classname = 'box';
 
-	if (size) {
-		classname = `${classname} box--${size}`;
-	}
+// 	if (size) {
+// 		classname = `${classname} box--${size}`;
+// 	}
 
+// 	return (
+// 		<div className={classname} style={styles}>
+// 			{children}
+// 		</div>
+// 	);
+// };
+
+// NOTE extra credit #1 correct
+let Box = ({ className = '', styles, ...otherProps }) => {
 	return (
-		<div className={classname} style={styles}>
-			{children}
-		</div>
+		<div
+			className={`box ${className}`}
+			styles={{ ...styles }}
+			{...otherProps}
+		/>
 	);
 };
+
+//NOTE extra credit #2 correct
+let BoxExtra = ({ size = '', ...otherProps }) => {
+	return (
+		<div
+			className={`box ${size ? 'box--' + size : ''}`}
+			{...otherProps}
+		/>
+	);
+};
+
+// Exercise
+const smallBox = (
+	<BoxExtra
+		// className='box--small'
+		size='small'
+		style={{ background: 'lightblue', fontStyle: 'italic' }}
+	>
+		small lightblue box
+	</BoxExtra>
+);
+
+const mediumBox = (
+	<Box
+		className='box--medium'
+		style={{ background: 'pink', fontStyle: 'italic' }}
+	>
+		medium pink box
+	</Box>
+);
+
+const largeBox = (
+	<Box
+		className='box--large'
+		style={{ background: 'orange', fontStyle: 'italic' }}
+	>
+		large orange box
+	</Box>
+);
 
 function App() {
 	return (
 		<div>
-			<Box
-				children={'TEST -- small red Box'}
-				styles={{ background: 'red', fontStyle: 'italic' }}
-				classname={'box box--small'}
-			/>
-			<Box1 children={'TEST -- extra credit 2'} size='small' />
 			{smallBox}
 			{mediumBox}
 			{largeBox}
